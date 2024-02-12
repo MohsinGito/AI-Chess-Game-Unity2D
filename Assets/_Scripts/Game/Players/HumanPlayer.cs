@@ -139,7 +139,7 @@ namespace Chess.Players
 			Move chosenMove = new Move();
 
 			MoveGenerator moveGenerator = new MoveGenerator();
-			bool wantsKnightPromotion = false;
+			bool wantsKnightPromotion = UnityEngine.InputSystem.Keyboard.current[UnityEngine.InputSystem.Key.LeftAlt].isPressed;
 
 			var legalMoves = moveGenerator.GenerateMoves(board);
 			for (int i = 0; i < legalMoves.Length; i++)

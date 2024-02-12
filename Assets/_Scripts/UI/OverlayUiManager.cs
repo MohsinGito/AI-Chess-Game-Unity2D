@@ -8,6 +8,7 @@ public class OverlayUiManager : Singleton<OverlayUiManager>
 {
 
     [field: SerializeField] public SettingsUI SettingsUI { private set; get; }
+    [field: SerializeField] public InfoPopUp InfoPopUp { private set; get; }
     [field: SerializeField] public GameObject PreLoaderUi { private set; get; }
 
     private void Start()

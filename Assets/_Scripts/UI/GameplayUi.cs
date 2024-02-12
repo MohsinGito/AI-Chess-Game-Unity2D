@@ -23,6 +23,8 @@ public class GameplayUi : MonoBehaviour
     [SerializeField] private CanvasGroup acceptDrawPanel;
     [SerializeField] private CanvasGroup matchDrawPanel;
 
+    private float timeElapased;
+
     public void OnPuaseButtonClick()
     {
         gameManager.GamePaused();
@@ -52,7 +54,8 @@ public class GameplayUi : MonoBehaviour
 
     public void ReturnToMenu()
     {
-        AdsManager.Instance.DisplayInterstitialAd(MoveToMenuScene, MoveToMenuScene);
+        AdsManager.Instance.DisplayInterstitialAd();
+        OverlayUiManager.Instance.LoadScene("Menu");
     }
 
     public void RestartGame()
@@ -66,7 +69,17 @@ public class GameplayUi : MonoBehaviour
     public void OfferDraw()
     {
         if (gameSettings.Opponent == GameManager.PlayerType.AI)
+        {
+            if (gameSettings.Mode != GameMode.EASY || Random.Range(0, 100) > 2 || (timeElapased / 60) < gameSettings.Duration)
+                OverlayUiManager.Instance.InfoPopUp.Display("Draw Offer Rejected!");
+            else
+            {
+                gameManager.GamePaused();
+                DisplayPanel(matchDrawPanel);
+            }
+
             return;
+        }
 
         HideAllPanels();
         DOVirtual.DelayedCall(0.25f, () => DisplayPanel(acceptDrawPanel));
@@ -87,6 +100,11 @@ public class GameplayUi : MonoBehaviour
     {
         gameManager.GamePaused();
         DOVirtual.DelayedCall(1f, () => DisplayResult(result));
+    }
+
+    private void Update()
+    {
+        timeElapased += Time.deltaTime;
     }
 
     private void DisplayResult(GameResult.Result result)
@@ -142,11 +160,6 @@ public class GameplayUi : MonoBehaviour
             resultText.text = string.Empty;
             DisplayPanel(matchDrawPanel);
         }
-    }
-
-    private void MoveToMenuScene()
-    {
-        OverlayUiManager.Instance.LoadScene("Menu");
     }
 
     private void DisplayPanel(CanvasGroup _panel)

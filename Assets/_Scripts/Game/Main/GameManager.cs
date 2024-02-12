@@ -8,6 +8,7 @@ using UnityEngine.Events;
 using System;
 using TMPro;
 using System.Collections.Generic;
+using DG.Tweening;
 
 namespace Chess.Game
 {
@@ -215,8 +216,7 @@ namespace Chess.Game
 				playerToMove = (board.IsWhiteToMove) ? whitePlayer : blackPlayer;
                 moveText.text = (playerToMove == whitePlayer ? player1Text.text : player2Text.text) + " Move";
 
-                playerToMove.NotifyTurnToMove();
-
+				DOVirtual.DelayedCall(playerToMove == blackPlayer && gameSettings.Opponent == PlayerType.AI ? 1 : 0, playerToMove.NotifyTurnToMove);
 			}
 			else
 			{

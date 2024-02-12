@@ -2560,6 +2560,7 @@ GameObject:
   - component: {fileID: 2060786470}
   - component: {fileID: 2060786469}
   - component: {fileID: 2060786472}
+  - component: {fileID: 2060786473}
   m_Layer: 5
   m_Name: Start Button
   m_TagString: Untagged
@@ -2693,6 +2694,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   clickSound: 4
+--- !u!114 &2060786473
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2060786467}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18a561d0167510e4db9b78d4636ef14e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetRectTransform: {fileID: 2060786468}
+  zoomScale: 1.1
+  zoomDuration: 0.5
+  zoomType: 0
 --- !u!1 &2125524689
 GameObject:
   m_ObjectHideFlags: 0
